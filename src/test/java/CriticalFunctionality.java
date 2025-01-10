@@ -26,8 +26,9 @@ public class CriticalFunctionality {
 
     @BeforeAll
     public static void setUp() {
-        // Setup path for my environment:   "C:\\Users\\User\\AppData\\Roaming\\undetected_chromedriver\\undetected_chromedriver.exe"
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\AppData\\Roaming\\undetected_chromedriver\\undetected_chromedriver.exe");
+        // Setup path for my environment:       C:\\Users\\User\\AppData\\Roaming\\undetected_chromedriver\\undetected_chromedriver.exe
+        // Chromedriver that comes with repo    chromedriver-win64/chromedriver.exe
+        System.setProperty("webdriver.chrome.driver", "chromedriver-win64/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         webDriver = new ChromeDriver(options);
