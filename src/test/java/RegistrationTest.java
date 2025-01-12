@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 public class RegistrationTest extends BaseClass{
@@ -20,6 +21,15 @@ public class RegistrationTest extends BaseClass{
         // Button push
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"target\"]/button"))).click();
         Thread.sleep(3000);
+    }
+    public String getTempMail() throws InterruptedException {
+        webDriver.get("https://temp-mail.org/en/");
+        Thread.sleep(10000);
+        String tempEmail = webDriver.findElement(By.xpath("//*[@id=\"mail\"]")).getText();
+        webDriver.navigate().back();
+        webDriver.navigate().refresh();
+        System.out.println(tempEmail);
+        return tempEmail;
     }
     @Test
     @Order(1)
@@ -44,5 +54,16 @@ public class RegistrationTest extends BaseClass{
         // Invalid data format
         sendDetails("Random", "Junk", "Random", "Junk");
         assertEquals((baseUrl + "/registracija"), webDriver.getCurrentUrl());
+    }
+    @Test
+    @Order(4)
+    public void validInformationTest() throws InterruptedException {
+        // Get temp mail
+        // String tempMail = getTempMail();
+        String tempMail = "temp@mail.com";
+        sendDetails("Sulejman", tempMail, "555555555", "12345678");
+        Thread.sleep(4000);
+        assertNotEquals(baseUrl, (baseUrl + "/registracija"));
+
     }
 }
